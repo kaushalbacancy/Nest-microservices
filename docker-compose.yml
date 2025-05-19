@@ -1,0 +1,25 @@
+services:
+  reservations:
+    build:
+      context: .
+      dockerfile: ./apps/reservations/Dockerfile
+      target: development
+    command: npm run start:dev reservations
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017/sleepr
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'  # Expose to host for Compass
+    volumes:
+      - mongo_data:/data/db  # Persist Mongo data
+
+volumes:
+  mongo_data:
