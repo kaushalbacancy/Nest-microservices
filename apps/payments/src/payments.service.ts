@@ -33,8 +33,7 @@ export class PaymentsService {
         allow_redirects: 'never' // 
       }
     });
-    console.log( "paymentIntentpaymentIntentpaymentIntentpaymentIntent")
-    this.notificationsService.emit('notify_email', { email })
+    this.notificationsService.emit('notify_email', { email, text: `Your payment is successfull: ${amount}` })
     return paymentIntent
   }
 }
