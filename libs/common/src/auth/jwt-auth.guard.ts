@@ -1,5 +1,5 @@
-import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
-import { map, Observable, tap } from "rxjs";
+import { CanActivate, ExecutionContext, Inject, Injectable, UnauthorizedException } from "@nestjs/common";
+import { catchError, map, Observable, tap, throwError } from "rxjs";
 import { ClientProxy } from "@nestjs/microservices";
 import { AUTH_SERVICE } from "../constants";
 import { UserDto } from "../dto";
@@ -19,7 +19,10 @@ export class JwtAuthGuard implements CanActivate {
             tap((res) => {
                 context.switchToHttp().getRequest().user = res
             }),
-            map(() => true)
+            map(() => true),
+            catchError((err) => {
+                return throwError(() => new UnauthorizedException('Invalid or expired token'));
+            })
         )
     }
 }
