@@ -48,6 +48,20 @@ services:
       - mongo
     environment:
       MONGO_URL: mongodb://mongo:27017/sleepr
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    command: npm run start:dev notifications
+    env_file:
+      - ./apps/notifications/.env
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017/sleepr    
   mongo:
     image: mongo
     ports:
