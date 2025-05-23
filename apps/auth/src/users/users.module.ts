@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { DatabaseModule, LoggerModule } from '\'/common';
-import { UsersDocument, UsersSchema } from './models/user.schema';
+import { DatabaseModule, UsersDocument, UsersSchema } from '\'/common';
 import { UsersRepository } from './users.repository';
 
 
