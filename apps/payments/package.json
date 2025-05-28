@@ -1,6 +1,7 @@
 {
   "name": "@sleepr/payments",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -10,8 +11,7 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "stripe": "^18.1.1"
+    "stripe": "14.1.0"
   }
 }

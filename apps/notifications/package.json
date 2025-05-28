@@ -1,6 +1,7 @@
 {
   "name": "@sleepr/notifications",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -10,5 +11,10 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "nodemailer": "^6.9.1"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.7"
+  }
 }

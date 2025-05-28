@@ -3,18 +3,17 @@ import { ConfigService } from '@nestjs/config';
 import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-    imports: [
-        MongooseModule.forRootAsync({
-            useFactory: (configService: ConfigService) => {
-                const uri = configService.get('MONGODB_URI')
-                // console.log('MongoDB URI:', configService)
-                return { uri }
-            },
-            inject: [ConfigService]
-        })]
+  imports: [
+    MongooseModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get('MONGODB_URI'),
+      }),
+      inject: [ConfigService],
+    }),
+  ],
 })
 export class DatabaseModule {
-    static forFeature(models: ModelDefinition[]) {
-        return MongooseModule.forFeature(models)
-    }
+  static forFeature(models: ModelDefinition[]) {
+    return MongooseModule.forFeature(models);
+  }
 }

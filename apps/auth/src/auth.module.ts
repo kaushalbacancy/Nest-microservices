@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
+import { HealthModule, LoggerModule } from '@app/common';
+import { JwtModule } from '@nestjs/jwt';
+import * as Joi from 'joi';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from './users/users.module';
-import { LoggerModule } from '\'/common';
-import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from 'joi';
-import { LocalStrategy } from './strategies/local.strategy';
+import { LocalStategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
     UsersModule,
+    LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -20,19 +21,20 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         JWT_EXPIRATION: Joi.string().required(),
         HTTP_PORT: Joi.number().required(),
         TCP_PORT: Joi.number().required(),
-      })
+      }),
     }),
-    LoggerModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: `${configService.get('JWT_EXPIRATION')}s`
-        }
+          expiresIn: `${configService.get('JWT_EXPIRATION')}s`,
+        },
       }),
-      inject: [ConfigService]
-    })],
+      inject: [ConfigService],
+    }),
+    HealthModule,
+  ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStategy, JwtStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}
