@@ -4,7 +4,7 @@
 # ========================
 FROM node:alpine AS development
 
-WORKDIR /usr/src/apps/auth
+WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY tsconfig.json tsconfig.json
@@ -14,7 +14,7 @@ COPY nest-cli.json nest-cli.json
 COPY apps/auth apps/auth
 COPY libs libs
 
-RUN ls
+# RUN ls
 
 RUN npm install
 
