@@ -10,8 +10,11 @@ COPY package.json ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
+
 COPY apps/auth apps/auth
 COPY libs libs
+
+RUN ls
 
 RUN npm install
 
