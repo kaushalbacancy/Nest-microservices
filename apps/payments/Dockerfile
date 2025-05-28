@@ -7,13 +7,16 @@ FROM node:alpine AS development
 WORKDIR /usr/src/app
 
 COPY package.json ./
+COPY pnpm-lock.yaml ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
+
+RUN npm install -g pnpm
 
 COPY apps/payments apps/payments
 COPY libs libs
 
-RUN cd apps/payments && npm install
+RUN npm install
 
 RUN npm run build payments
 
