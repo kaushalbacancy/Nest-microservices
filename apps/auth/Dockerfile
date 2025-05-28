@@ -16,7 +16,7 @@ COPY libs libs
 
 RUN ls
 
-RUN npm install
+RUN cd apps/auth && npm install
 
 RUN npm run build auth
 
