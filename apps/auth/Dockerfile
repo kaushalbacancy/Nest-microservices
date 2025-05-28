@@ -4,7 +4,7 @@
 # ========================
 FROM node:alpine AS development
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/apps/auth
 
 COPY package.json ./
 COPY tsconfig.json tsconfig.json
@@ -16,7 +16,7 @@ COPY libs libs
 
 RUN ls
 
-RUN cd apps/auth && npm install
+RUN npm install
 
 RUN npm run build auth
 
