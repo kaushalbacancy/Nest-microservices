@@ -21,18 +21,21 @@ export class PaymentsService {
   ) { }
 
   async createCharge({ card, amount, email }: PaymentsCreateChargeDto) {
-    const paymentMethod = await this.stripe.paymentMethods.create({
-      type: 'card',
-      card,
-    });
+    // const paymentMethod = await this.stripe.paymentMethods.create({
+    //   type: 'card',
+    //   card,
+    // });
 
-    const paymentIntent = await this.stripe.paymentIntents.create({
-      payment_method: paymentMethod.id,
+   const paymentIntent = await this.stripe.paymentIntents.create({
       amount: amount * 100,
-      confirm: true,
-      payment_method_types: ['card'],
       currency: 'usd',
-    });
+      confirm: true,
+      payment_method: 'pm_card_visa', // or a real one from frontend
+      automatic_payment_methods: {
+        enabled: true,
+        allow_redirects: 'never' // 
+      }
+    })
 
     this.notificationsService.emit('notify_email', {
       email,
