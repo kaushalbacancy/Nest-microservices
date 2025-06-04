@@ -6,7 +6,7 @@ import {
   Repository,
 } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { AbstractEntity } from './abstract.enitity';
+import { AbstractEntity } from './abstract.entity';
 
 export abstract class AbstractRepository<T extends AbstractEntity<T>> {
   protected abstract readonly logger: Logger;

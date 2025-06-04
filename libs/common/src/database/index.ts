@@ -1,3 +1,3 @@
-export * from './database.entitiy';
+export * from './database.module';
 export * from './abstract.repository';
-export * from './abstract.module';
+export * from './abstract.entity';
