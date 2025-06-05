@@ -68,6 +68,9 @@ services:
       - '27018:27017'  # Expose to host for Compass
     volumes:
       - mongo_data:/data/db  # Persist Mongo data
-
+  rabbitmq:
+    image: rabbitmq
+    ports:  
+      - '5672:5672'
 volumes:
   mongo_data:
